@@ -7,7 +7,7 @@ export default class PriceRangeSpecification implements Specification<Product> {
     private max: number,
   ) {}
 
-  isStatisfiedBy(item: Product): boolean {
+  isSatisfiedBy(item: Product): boolean {
     return item.price >= this.min && item.price <= this.max;
   }
 }

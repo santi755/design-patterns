@@ -6,7 +6,7 @@ export default class NameContainsSpecification
 {
   constructor(private subString: string) {}
 
-  isStatisfiedBy(item: Product): boolean {
+  isSatisfiedBy(item: Product): boolean {
     return item.name.includes(this.subString);
   }
 }

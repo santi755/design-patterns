@@ -1,9 +1,10 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import Product from './Product';
-import Filter from './Filter';
 import CategorySpecification from './CategorySpecification';
 import PriceRangeSpecification from './PriceRangeSpecification';
 import HasStockSpecification from './HasStockSpecification';
+import AndSpecification from './AndSpecification';
+import NameContainsSpecification from './NameContainsSpecification';
 
 @Controller()
 export class SpecificationController {
@@ -19,17 +20,22 @@ export class SpecificationController {
   getFilteredProducts(@Query() query: any) {
     const products = this.createMultipleProducts();
 
-    const filterBySpec = new Filter<Product>(products);
+    const NameContainsSpec = new NameContainsSpecification(query.name);
     const categorySpec = new CategorySpecification(query.category);
     const priceRangeSpec = new PriceRangeSpecification(
       query.minPrice,
       query.maxPrice,
     );
     const hasStockSpec = new HasStockSpecification(query.stock);
-    const filteredProducts = filterBySpec.filter(
+    const AndSpec = new AndSpecification([
+      NameContainsSpec,
       categorySpec,
       priceRangeSpec,
       hasStockSpec,
+    ]);
+
+    const filteredProducts = products.filter((product) =>
+      AndSpec.isSatisfiedBy(product),
     );
 
     return filteredProducts;

@@ -1,3 +1,3 @@
 export default interface Specification<T> {
-  isStatisfiedBy(item: T): boolean;
+  isSatisfiedBy(item: T): boolean;
 }
