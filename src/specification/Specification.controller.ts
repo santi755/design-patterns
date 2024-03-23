@@ -5,6 +5,7 @@ import PriceRangeSpecification from './PriceRangeSpecification';
 import HasStockSpecification from './HasStockSpecification';
 import AndSpecification from './AndSpecification';
 import NameContainsSpecification from './NameContainsSpecification';
+import OrSpecification from './OrSpecification';
 
 @Controller()
 export class SpecificationController {
@@ -27,7 +28,16 @@ export class SpecificationController {
       query.maxPrice,
     );
     const hasStockSpec = new HasStockSpecification(query.stock);
+    /*
     const AndSpec = new AndSpecification([
+      NameContainsSpec,
+      categorySpec,
+      priceRangeSpec,
+      hasStockSpec,
+    ]);
+    */
+
+    const OrSpec = new OrSpecification([
       NameContainsSpec,
       categorySpec,
       priceRangeSpec,
@@ -35,7 +45,8 @@ export class SpecificationController {
     ]);
 
     const filteredProducts = products.filter((product) =>
-      AndSpec.isSatisfiedBy(product),
+      //AndSpec.isSatisfiedBy(product),
+      OrSpec.isSatisfiedBy(product),
     );
 
     return filteredProducts;
