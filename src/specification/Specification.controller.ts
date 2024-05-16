@@ -3,7 +3,7 @@ import Product from './Product';
 import CategorySpecification from './CategorySpecification';
 import PriceRangeSpecification from './PriceRangeSpecification';
 import HasStockSpecification from './HasStockSpecification';
-import AndSpecification from './AndSpecification';
+// import AndSpecification from './AndSpecification';
 import NameContainsSpecification from './NameContainsSpecification';
 import OrSpecification from './OrSpecification';
 
@@ -28,6 +28,7 @@ export class SpecificationController {
       query.maxPrice,
     );
     const hasStockSpec = new HasStockSpecification(query.stock);
+
     /*
     const AndSpec = new AndSpecification([
       NameContainsSpec,
